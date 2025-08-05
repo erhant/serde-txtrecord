@@ -1,0 +1,52 @@
+name: Publish to crates.io
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    name: Publish crate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        run: rustup update stable && rustup default stable
+
+      - name: Extract version from Cargo.toml
+        id: extract_version
+        run: |
+          VERSION=$(grep '^version = ' Cargo.toml | sed 's/version = "\(.*\)"/\1/')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION"
+
+      - name: Check if version exists on crates.io
+        id: check_version
+        run: |
+          CRATE_NAME=$(grep '^name = ' Cargo.toml | sed 's/name = "\(.*\)"/\1/')
+          VERSION="${{ steps.extract_version.outputs.version }}"
+
+          echo "Checking if $CRATE_NAME version $VERSION exists on crates.io..."
+
+          # Query crates.io API to check if version exists
+          STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://crates.io/api/v1/crates/$CRATE_NAME/$VERSION")
+
+          if [ "$STATUS_CODE" = "200" ]; then
+            echo "Version $VERSION already exists on crates.io"
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "Version $VERSION does not exist on crates.io, proceeding with publish"
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run tests
+        if: steps.check_version.outputs.exists == 'false'
+        run: cargo test --verbose
+
+      - name: Publish to crates.io
+        if: steps.check_version.outputs.exists == 'false'
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: cargo publish
