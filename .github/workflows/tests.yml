@@ -23,3 +23,9 @@ jobs:
       - run: rustup update ${{ matrix.toolchain }} && rustup default ${{ matrix.toolchain }}
       - run: cargo build --verbose
       - run: cargo test --verbose
+
+      # run examples
+      - run: cargo run --example complex
+      - run: cargo run --example simple
+      - run: cargo run --example objobj
+      - run: cargo run --example vecvec
