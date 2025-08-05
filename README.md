@@ -233,16 +233,27 @@ The library includes comprehensive tests for:
 Check out the [examples directory](examples/) for more detailed usage examples:
 
 ```bash
-# Run the comprehensive book example
+# Simple usage demonstration
+cargo run --example simple
+
+# Complex nested data structures
 cargo run --example book
+
+# Multiple nested vectors (matrices, game boards)
+cargo run --example vecvec
+
+# Multiple nested objects (employee data, configurations)
+cargo run --example objobj
 ```
 
-This example demonstrates:
+### Example Descriptions
 
-- Complex nested data structures
-- Custom configuration options
-- Record length limit handling
-- Custom array length suffixes
+- **`simple.rs`**: Basic usage with a simple struct, perfect for getting started. Uses comprehensive assertions to verify serialization correctness.
+- **`book.rs`**: Comprehensive demonstration with complex nested structures, custom configuration, record length limits, and custom array length suffixes.
+- **`vecvec.rs`**: Demonstrates deeply nested vectors (Vec<Vec<T>>), useful for matrices, game boards, and tabular data. Includes thorough validation of multi-level indexing.
+- **`objobj.rs`**: Shows multiple levels of nested objects, ideal for configuration files and hierarchical data structures. Validates dot notation and optional fields.
+
+All examples use assertions to verify correctness and can serve as integration tests for the library's functionality.
 
 ## Error Handling
 
