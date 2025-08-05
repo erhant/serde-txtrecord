@@ -1,6 +1,25 @@
-# Serde TXT Record
+<p align="center">
+  <h1 align="center">
+    Serde TXT Record
+  </h1>
+  <p align="center">
+    <i>A Rust serialization and deserialization library for TXT record format using Serde.</i>
+  </p>
+</p>
 
-A Rust serialization and deserialization library for TXT record format using Serde. This library provides custom serde support for converting Rust data structures to and from TXT record format commonly used in DNS TXT records and configuration files.
+<p align="center">
+    <a href="https://opensource.org/license/mit" target="_blank">
+        <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-7CB9E8.svg">
+    </a>
+    <a href="./.github/workflows/tests.yml" target="_blank">
+        <img alt="Workflow: Tests" src="https://github.com/firstbatchxyz/dkn-compute-launcher/actions/workflows/tests.yml/badge.svg?branch=master">
+    </a>
+    <a href="https://github.com/foresterre/cargo-msrv" target="_blank">
+        <img alt="MSRV" src="https://img.shields.io/badge/1.78.0-F74B01?logo=rust&logoColor=white&label=msrv"/>
+    </a>
+</p>
+
+This library provides custom serde support for converting Rust data structures to and from TXT record format commonly used in DNS TXT records and configuration files.
 
 - [x] **Simple key-value pairs**: `key: value` → `key=value`
 - [x] **Arrays**: `key: ["val", "bal"]` → `key_0=val, key_1=bal, key_len=2`
@@ -63,7 +82,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
-You can provide a custom configuration as well, to avoid clashing names.
+You can provide a custom configuration as well, to avoid clashing names; use with `to_txt_records_with_config` and `from_txt_records_with_config`.
 
 ```rust
 use serde_txtrecord::{to_txt_records_with_config, TxtRecordConfig};

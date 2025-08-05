@@ -3,7 +3,7 @@ use serde::{Deserialize, Deserializer};
 use std::collections::HashMap;
 use std::fmt;
 
-use crate::ser::TxtRecordConfig;
+use crate::TxtRecordConfig;
 
 #[derive(Debug)]
 pub enum DeserializeError {

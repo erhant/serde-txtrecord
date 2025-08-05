@@ -2,7 +2,22 @@
 name = "serde-txtrecord"
 authors = ["Erhan Tezcan <erhany96@gmail.com>"]
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+description = "A Rust serialization and deserialization library for TXT record format using Serde"
+license = "MIT"
+repository = "https://github.com/erhany/serde-txtrecord"
+homepage = "https://github.com/erhany/serde-txtrecord"
+documentation = "https://docs.rs/serde-txtrecord"
+readme = "README.md"
+keywords = ["serde", "txt", "record", "dns", "serialization"]
+categories = ["encoding", "data-structures", "config", "network-programming"]
+exclude = ["target/", ".git/", ".gitignore"]
+
+# msrv
+rust-version = "1.78.0"
 
 [dependencies]
+serde = "1.0"
+
+[dev-dependencies]
 serde = { version = "1.0", features = ["derive"] }

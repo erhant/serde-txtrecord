@@ -28,25 +28,24 @@
 //!     age: 30,
 //! };
 //!
-//! // Serialize to TXT records
+//! // serialize to TXT records (key-value pairs of strings)
 //! let records = to_txt_records(&person).unwrap();
 //!
-//! // Deserialize back from TXT records
+//! // deserialize back from TXT records
 //! let deserialized: Person = from_txt_records(records).unwrap();
 //! assert_eq!(person, deserialized);
 //! ```
 
+pub mod config;
 pub mod de;
 pub mod ser;
 
-// Re-export main functionality
+// export main functionality
+pub use config::TxtRecordConfig;
 pub use de::{
-    DeserializeError, TxtRecordDeserializer, from_txt_records, from_txt_records_with_config,
+    from_txt_records, from_txt_records_with_config, DeserializeError, TxtRecordDeserializer,
 };
-pub use ser::{
-    TxtRecordConfig, TxtRecordError, TxtRecordSerializer, to_txt_records,
-    to_txt_records_with_config,
-};
+pub use ser::{to_txt_records, to_txt_records_with_config, TxtRecordError, TxtRecordSerializer};
 
 #[cfg(test)]
 mod tests {
