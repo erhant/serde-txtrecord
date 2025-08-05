@@ -1,5 +1,5 @@
 use serde::{Deserialize, Serialize};
-use serde_txtrecord::{TxtRecordConfig, from_txt_records, to_txt_records_with_config};
+use serde_txtrecord::{from_txt_records_with_config, to_txt_records_with_config, TxtRecordConfig};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 struct Author {
@@ -80,7 +80,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         array_len_suffix: ".count".to_string(), // instead of "_len"
         ..Default::default()
     };
-    let records = to_txt_records_with_config(&book, custom_config)?;
+    let records = to_txt_records_with_config(&book, custom_config.clone())?;
 
     // sort records by key for better readability
     let mut sorted_records = records.clone();
@@ -89,10 +89,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     for (key, value) in &sorted_records {
         println!("{}={}", key, value);
     }
-    println!("\nTotal records: {}", records.len());
 
     // sanity check
-    let deserialized_book: Book = from_txt_records(records)?;
+    let deserialized_book: Book = from_txt_records_with_config(records, custom_config)?;
     assert_eq!(
         book, deserialized_book,
         "deserialized book does not match original"
