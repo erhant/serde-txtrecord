@@ -12,7 +12,7 @@
         <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-7CB9E8.svg">
     </a>
     <a href="./.github/workflows/tests.yml" target="_blank">
-        <img alt="Workflow: Tests" src="https://github.com/firstbatchxyz/dkn-compute-launcher/actions/workflows/tests.yml/badge.svg?branch=master">
+        <img alt="Workflow: Tests" src="https://github.com/erhant/serde-txtrecord/actions/workflows/tests.yml/badge.svg?branch=main">
     </a>
     <a href="https://github.com/foresterre/cargo-msrv" target="_blank">
         <img alt="MSRV" src="https://img.shields.io/badge/1.78.0-F74B01?logo=rust&logoColor=white&label=msrv"/>
